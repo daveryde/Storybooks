@@ -1,6 +1,6 @@
 <h1>Edit Story</h1>
 <div class="row">
-    <form action="/stories/{{story.id}}?_method=PUT" method="POST" class="col s12">
+    <form action="/stories/{{story.id}}?_method=PUT" method="post" class="col s12">
         <input type="hidden" name="_method" value="PUT">
         <div class="row">
             <div class="input-field">
@@ -25,8 +25,9 @@
         <div class="row">
             <p>
                 <label for="allowComments">
-                <input type="checkbox" name="allowComments" class="allowComments" id="allowComments" {{#if story.allowComments}} checked="checked" {{/if}}>
-                <span>Allow Comments</span>
+                    <input type="checkbox" name="allowComments" class="allowComments" id="allowComments" {{#if story.allowComments}} checked="checked"
+                        {{/if}}>
+                    <span>Allow Comments</span>
                 </label>
             </p>
         </div>
