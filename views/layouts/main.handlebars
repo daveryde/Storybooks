@@ -18,6 +18,8 @@
     {{/if}}
     <main>
         <div class="container">
+        {{> _msg}}
+        {{> _errors}}
         {{{body}}}
         </div>
     </main>
@@ -36,9 +38,7 @@
             $('select').formSelect();
         });
 
-        CKEDITOR.replace('body', {
-            plugins: 'wysiwygarea,toolbar,basicstyles,link'
-        });
+        CKEDITOR.replace('body');
     </script>
 </body>
 </html>

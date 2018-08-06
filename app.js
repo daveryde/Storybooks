@@ -3,6 +3,7 @@ const path = require('path');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+const flash = require('connect-flash');
 const mongoose = require('mongoose');
 //const cookieParser = require('cookie-parser');
 const session = require('express-session');
@@ -75,8 +76,13 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(flash());
+
 // Set global vars
 app.use((req, res, next) => {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
     res.locals.user = req.user || null;
     next();
 });

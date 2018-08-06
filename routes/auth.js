@@ -14,12 +14,13 @@ router.get('/google/callback',
     if(req.user){
       console.log(req.user);
     } else {
-      console.log('Not Auth')
+      req.flash('error_msg', 'Please log in');
     }
   });
 
   router.get('/logout', (req, res) => {
     req.logout();
+    req.flash('success_msg', 'You are logged out');
     res.redirect('/');
   });
 

@@ -5,6 +5,7 @@ module.exports = {
             return next();
         }
         //console.log('Not Authenticated');
+        req.flash('error_msg', 'Please Log Back In');
         res.redirect('/');
     },
     ensureGuest: function(req, res, next){

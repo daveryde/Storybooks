@@ -11,6 +11,7 @@ router.get('/', ensureGuest, (req, res) => {
 router.get('/dashboard', ensureAuthenticated, (req, res) => {
     Story.find({user: req.user._id})
     .then(stories => {
+        req.flash('success_msg', 'Welcome {{story.user.id}}');
         res.render('index/dashboard',{
             stories: stories
         });

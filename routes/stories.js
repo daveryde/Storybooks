@@ -64,7 +64,8 @@ router.get('/add', ensureAuthenticated, (req, res) => {
 router.get('/edit/:id', ensureAuthenticated, (req, res) => {
   Story.findOne({
     _id: req.params.id
-  }).then(story => {
+  })
+  .then(story => {
     if (story.user != req.user.id) {
       res.redirect('/stories');
     } else {
@@ -94,7 +95,10 @@ router.post('/', (req, res) => {
   };
 
   // Create Story
-  new Story(newStory).save().then(story => {
+  new Story(newStory)
+  .save()
+  .then(story => {
+    req.flash('success_msg', 'Story added');
     res.redirect(`/stories/show/${story.id}`);
   });
 });
@@ -118,7 +122,9 @@ router.put('/:id', (req, res) => {
     story.status = req.body.status;
     story.allowComments = allowComments;
 
-    story.save().then(story => {
+    story.save()
+    .then(story => {
+      req.flash('success_msg', 'Story updated');
       res.redirect('/dashboard');
     });
   });
@@ -126,7 +132,9 @@ router.put('/:id', (req, res) => {
 
 // Delete Story
 router.delete('/:id', (req, res) => {
-  Story.remove({ _id: req.params.id }).then(() => {
+  Story.remove({ _id: req.params.id })
+  .then(() => {
+    req.flash('error_msg', 'Story removed');
     res.redirect('/dashboard');
   });
 });
