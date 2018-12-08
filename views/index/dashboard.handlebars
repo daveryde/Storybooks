@@ -1,34 +1,56 @@
-<h1>Welcome {{user.firstName}}</h1>
-<h4>Your Stories</h4>
-{{#if stories}}
-<table class="striped">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Date</th>
-            <th>Status</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        {{#each stories}}
-        <tr>
-            <td><a href="/stories/show/{{id}}">{{title}}</a></td>
-            <td>{{formatDate date 'MMM Do YYYY'}}</td>
-            <td><span class="dash-status">{{status}}</span></td>
-            <td><a class="btn left-align waves-effect waves-light" href="/stories/edit/{{id}}"><i class=" medium material-icons left">edit</i>
-                    Edit</a>
+<div class="row">
+    <div class="col s12 l8">
+        <h1 class="center">Welcome {{user.firstName}}</h1>
+    </div>
+    <div class="col s12 l8">
+        <h4 class="center">Your Stories</h4>
+        {{#if stories}}
+        <table class="centered striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each stories}}
+                <tr>
+                    <td><a href="/stories/show/{{id}}">{{title}}</a></td>
+                    <td>{{formatDate date 'MMM Do YYYY'}}</td>
+                    <td><span class="dash-status">{{status}}</span></td>
+                    <td><a class="btn left-align waves-effect waves-light" href="/stories/edit/{{id}}"><i class=" medium material-icons left">edit</i>
+                            Edit</a>
 
-                <form action="/stories/{{id}}?_method=DELETE" method="POST" id="delete-form">
-                    <input type="hidden" name="_method" value="DELETE">
-                    <button type="submit" class="btn left-align red waves-effect waves-light"><i class="medium material-icons left">close</i>
-                        Delete</button>
-                </form>
-            </td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
-{{else}}
-<p>You have not created any stories yet.</p>
-{{/if}}
+                        <form action="/stories/{{id}}?_method=DELETE" method="POST" id="delete-form">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="btn left-align red waves-effect waves-light"><i class="medium material-icons left">close</i>
+                                Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        {{else}}
+        <p>You have not created any stories yet.</p>
+        {{/if}}
+    </div>
+    <div class="col s12 m8 l4">
+        <div class="card">
+            <div class="card-image waves-effect waves-block waves-light">
+                <img class="activator" src="{{user.image}}">
+            </div>
+            <div class="card-content">
+                <span class="card-title center">{{user.firstName}} {{user.lastName}}</span>
+            </div>
+            <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i>
+                    <a href="/stories/user/{{user.id}}">More From
+                        {{user.firstName}}</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

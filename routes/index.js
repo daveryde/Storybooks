@@ -2,25 +2,23 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const Story = mongoose.model('stories');
-const {ensureAuthenticated, ensureGuest} = require('../helpers/auth');
+const { ensureAuthenticated, ensureGuest } = require('../helpers/auth');
 
 router.get('/', ensureGuest, (req, res) => {
-    res.render('index/welcome');
+  res.render('index/welcome');
 });
 
 router.get('/dashboard', ensureAuthenticated, (req, res) => {
-    Story.find({user: req.user._id})
-    .then(stories => {
-        req.flash('success_msg', 'Welcome {{story.user.id}}');
-        res.render('index/dashboard',{
-            stories: stories
-        });
+  Story.find({ user: req.user._id }).then(stories => {
+    req.flash('success_msg', 'Welcome {{story.user.id}}');
+    res.render('index/dashboard', {
+      stories: stories
     });
-
+  });
 });
 
 router.get('/about', (req, res) => {
-    res.render('index/about');
+  res.render('index/about');
 });
 
 module.exports = router;
