@@ -26,51 +26,60 @@ const keys = require('./config/keys');
 
 // Handlebars Helpers
 const {
-    truncate,
-    stripTags,
-    formatDate,
-    select,
-    editIcon
+  truncate,
+  stripTags,
+  formatDate,
+  select,
+  editIcon
 } = require('./helpers/hbs');
 
 // Map Global Promises
 mongoose.Promise = global.Promise;
 
 // Mongoose Connect
-mongoose.connect(keys.mongoURI, {
-    useNewUrlParser: true
-})
-    .then(() => console.log('MongoDB Connected'))
-    .catch(err => console.log(err));
+mongoose
+  .connect(
+    keys.mongoURI,
+    {
+      useNewUrlParser: true
+    }
+  )
+  .then(() => console.log('MongoDB Connected'))
+  .catch(err => console.log(err));
 
 const app = express();
 
 // Body Parser Middleware
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // Method Override Middleware
 app.use(methodOverride('_method'));
 
 // Handlebars Middleware
-app.engine('handlebars', exphbs({
+app.engine(
+  'handlebars',
+  exphbs({
     helpers: {
-        truncate: truncate,
-        stripTags: stripTags,
-        formatDate:formatDate,
-        select:select,
-        editIcon:editIcon
+      truncate: truncate,
+      stripTags: stripTags,
+      formatDate: formatDate,
+      select: select,
+      editIcon: editIcon
     },
-    defaultLayout:'main'
-}));
+    defaultLayout: 'main'
+  })
+);
 app.set('view engine', 'handlebars');
 
 //app.use(cookieParser());
-app.use(session({
+app.use(
+  session({
     secret: 'secret',
     resave: false,
     saveUninitialized: false
-}))
+  })
+);
 
 // Passport Middleware
 app.use(passport.initialize());
@@ -80,11 +89,11 @@ app.use(flash());
 
 // Set global vars
 app.use((req, res, next) => {
-    res.locals.success_msg = req.flash('success_msg');
-    res.locals.error_msg = req.flash('error_msg');
-    res.locals.error = req.flash('error');
-    res.locals.user = req.user || null;
-    next();
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  res.locals.user = req.user || null;
+  next();
 });
 
 // Set Static Folder
@@ -98,5 +107,5 @@ app.use('/stories', stories);
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
-    console.log(`Server started on port ${port}`);
+  console.log(`Server started on port ${port}`);
 });

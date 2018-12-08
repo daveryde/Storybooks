@@ -8,6 +8,7 @@
             <!-- RIGHT NAV -->
             <ul class="right hide-on-small-only">
                 {{#if user}}
+                <li><a href="/stories/my"><i class="fa fa-user"></i> My Stories</a></li>
                 <li>
                     <a href="/dashboard">Welcome {{user.firstName}}</a>
                 </li>
@@ -25,7 +26,7 @@
             <!-- SIDE MENU -->
             <ul class="sidenav" id="main-menu">
 
-                {{#if user}} 
+                {{#if user}}
                 {{else}}
                 <li>
                     <a class="btn red darken-1" href="/auth/google">

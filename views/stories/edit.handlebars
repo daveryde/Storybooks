@@ -25,8 +25,8 @@
         <div class="row">
             <p>
                 <label for="allowComments">
-                    <input type="checkbox" name="allowComments" class="allowComments" id="allowComments" {{#if story.allowComments}} checked="checked"
-                        {{/if}}>
+                    <input type="checkbox" name="allowComments" class="allowComments" id="allowComments"
+                        {{#if story.allowComments}} checked="checked" {{/if}}>
                     <span>Allow Comments</span>
                 </label>
             </p>
@@ -35,10 +35,12 @@
         <div class="row">
             <div class="input-field">
                 <h5>Tell Us Your Story</h5>
-                <textarea name="body">{{story.body}}</textarea>
+                <textarea name="body">
+                    {{story.body}}
+                </textarea>
             </div>
         </div>
 
-        <input type="submit" value="Save" class="btn">
+        <input type="submit" value="Save" class="btn waves-effect waves-light">
     </form>
 </div>
